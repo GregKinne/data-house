@@ -35,7 +35,7 @@ jobs:
         with:
           file: deploy/dbdeploy.Dockerfile
           tags: |
-            ghcr.io/${{ github.repository_owner }}/dbdeploy:latest 
+            ghcr.io/gregkinne/dbdeploy:latest 
           push: true
   #docker-run-dotnet-build:
     #runs-on: docker
