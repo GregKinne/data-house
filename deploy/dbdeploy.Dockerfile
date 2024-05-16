@@ -14,7 +14,7 @@ RUN apt update
 RUN apt-get install terraform -y
 RUN terraform init
 
-# Setup the dotnet sqlproject in order to build the database model
+# Setup the dotnet sqlproject to build the database model
 RUN dotnet new --install MSBuild.Sdk.SqlProj.Templates
 RUN dotnet new sqlproj -s Sql150 --name dbmodel
 
