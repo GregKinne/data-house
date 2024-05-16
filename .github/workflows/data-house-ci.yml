@@ -25,10 +25,10 @@ jobs:
 
       -
         name: build the database model
-        run: docker run dotnet new sqlproj -s Sql150 --name dbmodel && dotnet build ./dbmodel/dbmodel.csproj  
+        run: docker run dbdeploy dotnet new sqlproj -s Sql150 --name dbmodel && dotnet build ./dbmodel/dbmodel.csproj  
         id: build-dbmodel
 
       -
         name: run the TSQL linter
-        run: docker run tsqllint --print-config
+        run: docker run dbdeploy tsqllint --print-config
         id: run-linter
