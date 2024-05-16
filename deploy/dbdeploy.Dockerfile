@@ -14,12 +14,6 @@ RUN apt update
 RUN apt-get install terraform -y
 RUN terraform init
 
-# Setup GCloud CLI
-RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-RUN apt update
-RUN apt-get install google-cloud-cli -y
-
 # Setup the dotnet sqlproject in order to build the database model
 RUN dotnet new --install MSBuild.Sdk.SqlProj.Templates
 RUN dotnet new sqlproj -s Sql150 --name dbmodel
@@ -33,7 +27,7 @@ RUN curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/
 RUN chmod +x cloud-sql-proxy
 
 # Move database object definition files to the container
-COPY src/data-house /app
+COPY dbmodel /app
 
 # Build the database project (create the .dacpac file used for deployment)
 RUN dotnet build ./dbmodel/dbmodel.csproj  
