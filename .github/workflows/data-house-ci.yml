@@ -36,5 +36,6 @@ jobs:
           file: deploy/dbdeploy.Dockerfile
           tags: |
             gregkinne/dbdeploy:${{ GITHUB_RUN_ID }}.${{ GITHUB_RUN_ATTEMPT }}
+          push: true
           
           
