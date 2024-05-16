@@ -16,7 +16,7 @@ jobs:
       -
         name: build the dbdeploy dockerfile
         id: build-dockerfile
-        run: docker build --file deploy/Dockerfile --tag dbdeploy .
+        run: docker build --file deploy/dbdeploy.Dockerfile --tag dbdeploy .
 
       -
         name: generate the sqlproj file
