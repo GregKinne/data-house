@@ -35,13 +35,14 @@ jobs:
         with:
           file: deploy/dbdeploy.Dockerfile
           tags: |
-            ghcr.io/gregkinne/dbdeploy:latest 
-            ghcr.io/gregkinne/dbdeploy:$GITHUB_RUN_NUMBER
+            ghcr.io/gregkinne/dbdeploy:${{ GITHUB_RUN_NUMBER }}
+          labels: |
+          
           push: true
   docker-run-dotnet-build:
     needs: docker-build
     runs-on: ubuntu-latest
-    container: ghcr.io/gregkinne/dbdeploy:$GITHUB_RUN_NUMBER
+    container: ghcr.io/gregkinne/dbdeploy:${{ GITHUB_RUN_NUMBER }}
     steps:
       -
         name: testing
