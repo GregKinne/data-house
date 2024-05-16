@@ -34,7 +34,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: deploy/dbdeploy.Dockerfile
-          tags: GregKinne/dbdeploy:latest
+          tags: |
+            ghcr.io/GregKinne/dbdeploy:latest 
           push: true
   #docker-run-dotnet-build:
     #runs-on: docker
