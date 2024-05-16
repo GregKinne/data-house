@@ -10,7 +10,7 @@ on:
       - ".github/workflows/**"
 
 jobs:
-  docker:
+  docker-build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -35,4 +35,11 @@ jobs:
         with:
           file: deploy/dbdeploy.Dockerfile
           tags: treetop/dbdeploy:latest
+          push: true
+  docker-run-dotnet-build:
+    runs-on: docker
+    steps:
+      -
+        name: testing
+        run: docker run dotnet build ./dbmodel/dbmodel.csproj
           
