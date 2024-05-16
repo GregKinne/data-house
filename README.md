@@ -1,2 +1,4 @@
 # data-house
-Microsoft SQL variant CI/CD
+
+### todo
+- Terraform management of all db related resources
