@@ -5,10 +5,9 @@ on:
     branches:
     - main
     paths:
-      - "src/data-house/dbmodel/**"
-      - "src/common/**"
-      - "deploy/dbdeploy.Dockerfile"
-      - ".github/workflows/data-house-**"
+      - "dbmodel/**"
+      - "deploy/**"
+      - ".github/workflows/**"
 
 jobs:
   docker:
