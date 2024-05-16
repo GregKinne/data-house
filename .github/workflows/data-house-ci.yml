@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
+        name: Checkout the data-house repository
+        id: checkout-repo
         uses: actions/checkout@v4
         
       -
@@ -23,16 +24,11 @@ jobs:
         run: docker build --file deploy/dbdeploy.Dockerfile --tag dbdeploy .
 
       -
-        name: generate the sqlproj file
-        run: dotnet new sqlproj -s Sql150 --name dbmodel
-        id: generate-sqlproj
-
-      -
         name: build the database model
-        run: dotnet build ./dbmodel/dbmodel.csproj  
+        run: docker run dotnet new sqlproj -s Sql150 --name dbmodel && dotnet build ./dbmodel/dbmodel.csproj  
         id: build-dbmodel
 
       -
         name: run the TSQL linter
-        run: tsqllint --print-config
+        run: docker run tsqllint --print-config
         id: run-linter
