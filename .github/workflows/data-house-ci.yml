@@ -34,12 +34,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: deploy/dbdeploy.Dockerfile
-          tags: treetop/dbdeploy:latest
+          tags: GregKinne/dbdeploy:latest
           push: true
-  docker-run-dotnet-build:
-    runs-on: docker
-    steps:
-      -
-        name: testing
-        run: docker run dotnet build ./dbmodel/dbmodel.csproj
+  #docker-run-dotnet-build:
+    #runs-on: docker
+    #steps:
+      #-
+        #name: testing
+        #run: docker run dotnet build ./dbmodel/dbmodel.csproj
           
