@@ -20,12 +20,12 @@ jobs:
         -
             name: Create sqlproj
             run: |
-                dotnet new sqlproj -s SqlAzure --name dbmodel
+                dotnet new sqlproj -s SqlAzure --name dbmodel --force
 
         -
             name: Build dbmodel
             run: |
-                dotnet build dbmodel/dbmodel.csproj --force
+                dotnet build dbmodel/dbmodel.csproj
 
         
         
