@@ -1,8 +1,3 @@
-SET NOCOUNT ON;
-SET ANSI_NULLS ON;
-SET QUOTED_IDENTIFIER ON;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
 IF @@SERVERNAME = 'prod-weatherserver9128'
 BEGIN
     ALTER ROLE [db_datareader] ADD MEMBER [hows-the-weather@kinne.solutions];
@@ -10,6 +5,7 @@ BEGIN
 
     ALTER ROLE [db_owner]      ADD MEMBER [db-deploy@kinne.solutions];
 END
+GO
 
 IF @@SERVERNAME = 'weatherserver9128'
 BEGIN

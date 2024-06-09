@@ -1,8 +1,3 @@
-SET NOCOUNT ON;
-SET ANSI_NULLS ON;
-SET QUOTED_IDENTIFIER ON;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
 CREATE TABLE [data].[AirQuality](
 	[city_name]             [varchar](255)      NOT NULL,
 	[state_code]            [varchar](2)        NOT NULL,

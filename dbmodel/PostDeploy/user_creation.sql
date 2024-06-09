@@ -1,8 +1,3 @@
-SET NOCOUNT ON;
-SET ANSI_NULLS ON;
-SET QUOTED_IDENTIFIER ON;
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
-
 IF @@SERVERNAME = 'prod-weatherserver9128'
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = 'hows-the-weather@kinne.solutions')
@@ -18,6 +13,7 @@ BEGIN
         /* tsqllint-enable invalid-syntax */
     END
 END
+GO
 
 IF @@SERVERNAME = 'weatherserver9128'
 BEGIN

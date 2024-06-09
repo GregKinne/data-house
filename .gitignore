@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 .secrets.toml
+*/bin/*
+*/obj/*
