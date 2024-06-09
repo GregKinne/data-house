@@ -78,7 +78,7 @@ jobs:
                 -d weather \
                 -U db-deploy@kinne.dev \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
-                -i PostDeploy/user_creation.sql \
+                -i dbmodel/PostDeploy/user_creation.sql \
                 -G
 
         - 
@@ -89,5 +89,5 @@ jobs:
                 -d weather \
                 -U db-deploy@kinne.dev \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
-                -i PostDeploy/user_permissions.sql \
+                -i dbmodel/PostDeploy/user_permissions.sql \
                 -G
