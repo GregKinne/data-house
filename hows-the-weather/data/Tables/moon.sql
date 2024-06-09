@@ -13,5 +13,13 @@ CREATE TABLE [data].[Moon](
 	[country_code]      [varchar](2)    NOT NULL,
 	[lat]               [float](24)     NOT NULL,
 	[lon]               [float](24)     NOT NULL,
-	[generated_on]      [datetime]      NOT NULL
+	[generated_on]      [datetime]      NOT NULL,
+
+    PRIMARY KEY CLUSTERED 
+    (
+        [city_name] ASC,
+        [state_code] ASC,
+        [country_code] ASC,
+        [report_date] ASC
+    )
 );
