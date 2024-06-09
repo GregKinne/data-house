@@ -1,0 +1,9 @@
+fail_fast: true
+repos:
+-   repo: local
+    hooks:
+      - id: tsqllint
+        name: run tsqllint
+        entry: tsqllint
+        language: system
+        args: [".", "--config", ".tsqllint"]

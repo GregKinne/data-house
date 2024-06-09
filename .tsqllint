@@ -4,7 +4,7 @@
         "conditional-begin-end": "error",
         "count-star": "error",
         "cross-database-transaction": "error",
-        "data-compression": "error",
+        "data-compression": "warning",
         "data-type-length": "error",
         "delete-where": "error",
         "disallow-cursors": "error",

@@ -1,0 +1,32 @@
+name: ci-tsqllint
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  tsqllint:
+    runs-on: ubuntu-latest
+    steps:
+        - 
+            uses: actions/checkout@v4
+
+        -
+            name: Install SqlProj
+            run: |
+                dotnet new --install MSBuild.Sdk.SqlProj.Templates
+
+        -
+            name: Create sqlproj
+            run: |
+                dotnet new sqlproj -s SqlAzure --name dbmodel
+
+        -
+            name: Build dbmodel
+            run: |
+                dotnet build dbmodel/dbmodel.sqlproj
+
+        
+        
+        
