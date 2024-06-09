@@ -21,12 +21,12 @@ jobs:
         -
             name: Create sqlproj
             run: |
-                dotnet new sqlproj -s SqlAzure --name dbmodel --force
+                dotnet new sqlproj -s SqlAzure --name hows-the-weather --force
 
         -
-            name: Build dbmodel
+            name: Build db model
             run: |
-                dotnet build dbmodel/dbmodel.csproj
+                dotnet build hows-the-weather/hows-the-weather.csproj
 
         -
             name: Add MSFT key
@@ -67,7 +67,7 @@ jobs:
             name: deploy database
             run: |
                 sqlpackage /Action:Publish \
-                /SourceFile:dbmodel/bin/Debug/netstandard2.0/dbmodel.dacpac \
+                /SourceFile:hows-the-weather/bin/Debug/netstandard2.0/hows-the-weather.dacpac \
                 /TargetConnectionString:"Data Source=weatherserver9128.database.windows.net; Initial Catalog=weather; Authentication=Active Directory Password; UID=db-deploy@kinne.dev; PWD=${{ secrets.DB_DEPLOY_PASS }}"
 
         - 
@@ -78,7 +78,7 @@ jobs:
                 -d weather \
                 -U db-deploy@kinne.dev \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
-                -i dbmodel/PostDeploy/user_creation.sql \
+                -i hows-the-weather/PostDeploy/user_creation.sql \
                 -G
 
         - 
@@ -89,5 +89,5 @@ jobs:
                 -d weather \
                 -U db-deploy@kinne.dev \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
-                -i dbmodel/PostDeploy/user_permissions.sql \
+                -i hows-the-weather/PostDeploy/user_permissions.sql \
                 -G
