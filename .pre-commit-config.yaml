@@ -1,0 +1,16 @@
+repos:
+-   repo: local
+    hooks:
+      - id: tsqllint
+        name: run tsqllint
+        entry: tsqllint
+        language: system
+        args: [".", "--config", ".tsqllint"]
+        files: ".*\\.sql$"
+-   repo: local
+    hooks:
+      - id: build-db
+        name: build the db model
+        entry: dotnet build dbmodel/dbmodel.csproj
+        language: system
+        pass_filenames: false

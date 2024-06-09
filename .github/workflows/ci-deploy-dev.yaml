@@ -1,0 +1,93 @@
+name: ci-deploy-dev
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+        - 
+            uses: actions/checkout@v4
+
+        -
+            name: Install SqlProj
+            run: |
+                dotnet new --install MSBuild.Sdk.SqlProj.Templates
+
+        -
+            name: Create sqlproj
+            run: |
+                dotnet new sqlproj -s SqlAzure --name dbmodel --force
+
+        -
+            name: Build dbmodel
+            run: |
+                dotnet build dbmodel/dbmodel.csproj
+
+        -
+            name: Add MSFT key
+            run: |
+                curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+
+        -
+            name: Add MSFT repo
+            run: |
+                curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+
+        -
+            name: apt update
+            run: |
+                sudo apt update
+
+        -
+            name: install mssql
+            run: |
+                ACCEPT_EULA=Y sudo apt-get install mssql-tools18 unixodbc-dev -y 
+
+        -
+            name: Add sqlcmd to path
+            run: |
+                export PATH="$PATH:/opt/mssql-tools18/bin"
+
+        -
+            name: install sqlpackage
+            run: |
+                dotnet tool install --global microsoft.sqlpackage
+
+        -
+            name: add dotnet tooling to path
+            run: |
+                export PATH="${PATH}:/root/.dotnet/tools"
+
+        -
+            name: deploy database
+            run: |
+                sqlpackage /Action:Publish \
+                /SourceFile:dbmodel/bin/Debug/netstandard2.0/dbmodel.dacpac \
+                /TargetConnectionString:"Data Source=weatherserver9128.database.windows.net; Initial Catalog=weather; Authentication=Active Directory Password; UID=db-deploy@kinne.dev; PWD=${{ secrets.DB_DEPLOY_PASS }}"
+
+        - 
+            name: post deploy user creation
+            run: |
+                sqlcmd \
+                -S weatherserver9128.database.windows.net \
+                -d weather \
+                -U db-deploy@kinne.dev \
+                -P ${{ secrets.DB_DEPLOY_PASS }} \
+                -i dbmodel/PostDeploy/user_creation.sql \
+                -G
+
+        - 
+            name: post deploy user permissions
+            run: |
+                sqlcmd \
+                -S weatherserver9128.database.windows.net \
+                -d weather \
+                -U db-deploy@kinne.dev \
+                -P ${{ secrets.DB_DEPLOY_PASS }} \
+                -i dbmodel/PostDeploy/user_permissions.sql \
+                -G

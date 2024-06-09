@@ -1,13 +1,9 @@
-name: data-house-ci
+name: ci-build-docker
 
 on:
   pull_request:
     branches:
     - main
-    paths:
-      - "dbmodel/**"
-      - "deploy/**"
-      - ".github/workflows/**"
 
 jobs:
   docker:

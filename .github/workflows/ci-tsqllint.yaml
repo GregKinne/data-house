@@ -1,0 +1,33 @@
+name: ci-tsqllint
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  tsqllint:
+    runs-on: ubuntu-latest
+    steps:
+        - 
+            uses: actions/checkout@v4
+
+        -
+            name: Install Dotnet
+            run: |
+                sudo apt-get install -y dotnet-sdk-6.0
+
+        -
+            name: Install tsqllint
+            run: |
+                dotnet tool install --global TSQLLint
+
+        -
+            name: run tsqllint
+            run: |
+                tsqllint . --config .tsqllint
+
+
+        
+        
+        
