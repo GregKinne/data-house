@@ -53,7 +53,7 @@ jobs:
         -
             name: install mssql
             run: |
-                ACCEPT_EULA=Y apt-get install mssql-tools18 unixodbc-dev -y 
+                ACCEPT_EULA=Y sudo apt-get install mssql-tools18 unixodbc-dev -y 
 
         -
             name: Add sqlcmd to path
