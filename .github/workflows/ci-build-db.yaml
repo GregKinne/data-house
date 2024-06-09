@@ -25,9 +25,7 @@ jobs:
         -
             name: Build dbmodel
             run: |
-                ls -lah
-                ls -lah dbmodel
-                dotnet build dbmodel/dbmodel.sqlproj
+                dotnet build dbmodel/dbmodel.csproj
 
         
         
