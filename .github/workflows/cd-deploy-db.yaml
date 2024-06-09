@@ -1,7 +1,7 @@
-name: ci-build-db
+name: cd-deploy-db
 
 on:
-  pull_request:
+  push:
     branches:
     - main
 
@@ -25,7 +25,6 @@ jobs:
         -
             name: Build dbmodel
             run: |
-                ls -lah
                 dotnet build dbmodel/dbmodel.sqlproj
 
         

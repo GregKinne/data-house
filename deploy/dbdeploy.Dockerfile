@@ -8,6 +8,9 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | tee /etc/apt/truste
 # Add msft repo
 RUN curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | tee /etc/apt/sources.list.d/mssql-release.list
 
+# Updaate repos
+RUN apt-get update
+
 # Install sqlcmd
 RUN ACCEPT_EULA=Y apt-get install mssql-tools18 unixodbc-dev -y 
 

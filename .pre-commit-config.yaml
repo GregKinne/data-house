@@ -6,3 +6,4 @@ repos:
         entry: tsqllint
         language: system
         args: [".", "--config", ".tsqllint"]
+        files: ".*\\.sql$"
