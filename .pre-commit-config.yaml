@@ -7,3 +7,10 @@ repos:
         language: system
         args: [".", "--config", ".tsqllint"]
         files: ".*\\.sql$"
+-   repo: local
+    hooks:
+      - id: build-db
+        name: build the db model
+        entry: dotnet build dbmodel/dbmodel.csproj
+        language: system
+        pass_filenames: false
