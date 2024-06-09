@@ -25,7 +25,7 @@ jobs:
         -
             name: Build dbmodel
             run: |
-                dotnet build dbmodel/dbmodel.csproj
+                dotnet build dbmodel/dbmodel.csproj --force
 
         
         
