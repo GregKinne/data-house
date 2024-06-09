@@ -1,4 +1,4 @@
-name: ci-build-db-deploy-dev
+name: ci-deploy-dev
 
 on:
   pull_request:
@@ -27,14 +27,6 @@ jobs:
             run: |
                 dotnet build dbmodel/dbmodel.csproj
 
-        
-
-
-  deploy-db:
-    runs-on: ubuntu-latest
-    needs: build-db
-    environment: dev
-    steps:
         -
             name: Add MSFT key
             run: |
