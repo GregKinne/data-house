@@ -25,7 +25,7 @@ jobs:
         -
             name: run tsqllint
             run: |
-                tsqllint 
+                tsqllint . --config .tsqllint
 
 
         
