@@ -8,7 +8,7 @@ on:
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: main
     steps:
         - 
             uses: actions/checkout@v4
@@ -68,15 +68,15 @@ jobs:
             run: |
                 sqlpackage /Action:Publish \
                 /SourceFile:hows-the-weather/bin/Debug/netstandard2.0/hows-the-weather.dacpac \
-                /TargetConnectionString:"Data Source=weatherserver9128.database.windows.net; Initial Catalog=weather; Authentication=Active Directory Password; UID=db-deploy@kinne.dev; PWD=${{ secrets.DB_DEPLOY_PASS }}"
+                /TargetConnectionString:"Data Source=${{ secrets.DB_DEPLOY_HOST }}; Initial Catalog=${{ secrets.DB_DEPLOY_DATABASE }}; UID=${{ secrets.DB_DEPLOY_USER}}; PWD=${{ secrets.DB_DEPLOY_PASS }}"
 
         - 
             name: post deploy user creation
             run: |
                 sqlcmd \
-                -S weatherserver9128.database.windows.net \
-                -d weather \
-                -U db-deploy@kinne.dev \
+                -S ${{ secrets.DB_DEPLOY_HOST }} \
+                -d ${{ secrets.DB_DEPLOY_DATABASE }} \
+                -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_creation.sql \
                 -G
@@ -85,9 +85,9 @@ jobs:
             name: post deploy user permissions
             run: |
                 sqlcmd \
-                -S weatherserver9128.database.windows.net \
-                -d weather \
-                -U db-deploy@kinne.dev \
+                -S ${{ secrets.DB_DEPLOY_HOST }} \
+                -d ${{ secrets.DB_DEPLOY_DATABASE }} \
+                -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_permissions.sql \
                 -G

@@ -1,0 +1,1 @@
+sqlcmd -S <ServerName> -d <DatabaseName> -Q "SELECT * FROM <TableName>"
