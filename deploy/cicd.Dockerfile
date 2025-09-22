@@ -1,7 +1,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /app
+
 ENV PATH="$PATH:/root/.dotnet/tools"
+ENV ACCEPT_EULA=Y 
+
+## Install TSQLLint
 RUN dotnet tool install --global TSQLLint
 
 COPY ./.tsqllint ./.tsqllint
@@ -13,4 +17,14 @@ RUN tsqllint . --config ./.tsqllint
 RUN dotnet new --install MSBuild.Sdk.SqlProj.Templates
 
 ## Create the new sql project
-RUN dotnet new sqlproj --name hows-the-weather --force
+RUN dotnet new sqlproj -s SqlAzure --name hows-the-weather --force
+
+## Build the project
+RUN dotnet build hows-the-weather/hows-the-weather.csproj
+
+## Download MSFT Key and Add MSFT Repo
+RUN apt-get install mssql-tools18 unixodbc-dev -y 
+ENV PATH="$PATH:/opt/mssql-tools18/bin"
+
+## Install sqlpackage
+RUN dotnet tool install --global microsoft.sqlpackage

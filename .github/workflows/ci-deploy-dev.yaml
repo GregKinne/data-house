@@ -68,7 +68,10 @@ jobs:
             run: |
                 sqlpackage /Action:Publish \
                 /SourceFile:hows-the-weather/bin/Debug/netstandard2.0/hows-the-weather.dacpac \
-                /TargetConnectionString:"Data Source=${{ secrets.DB_DEPLOY_HOST }}; Initial Catalog=${{ secrets.DB_DEPLOY_DATABASE }}; UID=${{ secrets.DB_DEPLOY_USER}}; PWD=${{ secrets.DB_DEPLOY_PASS }}"
+                /TargetServerName:"${{ secrets.DB_DEPLOY_HOST }}" \
+                /TargetDatabaseName:"${{ secrets.DB_DEPLOY_DATABASE }}" \
+                /TargetUser:"${{ secrets.DB_DEPLOY_USER}}" \
+                /TargetPassword:"${{ secrets.DB_DEPLOY_PASS }}"
 
         - 
             name: post deploy user creation
