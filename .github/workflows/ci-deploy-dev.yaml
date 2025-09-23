@@ -71,7 +71,8 @@ jobs:
                 /TargetServerName:"${{ secrets.DB_DEPLOY_HOST }}" \
                 /TargetDatabaseName:"${{ secrets.DB_DEPLOY_DATABASE }}" \
                 /TargetUser:"${{ secrets.DB_DEPLOY_USER}}" \
-                /TargetPassword:"${{ secrets.DB_DEPLOY_PASS }}"
+                /TargetPassword:"${{ secrets.DB_DEPLOY_PASS }}" \
+                /TargetTrustServerCertificate:True
 
         - 
             name: post deploy user creation
@@ -82,7 +83,7 @@ jobs:
                 -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_creation.sql \
-                -G
+                -G -C
 
         - 
             name: post deploy user permissions
@@ -93,4 +94,4 @@ jobs:
                 -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_permissions.sql \
-                -G
+                -G -C

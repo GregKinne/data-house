@@ -1,9 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM ubuntu:22.04 AS build
 
 WORKDIR /app
 
 ENV PATH="$PATH:/root/.dotnet/tools"
 ENV ACCEPT_EULA=Y 
+
+RUN apt-get install -y dotnet-sdk-6.0
 
 ## Install TSQLLint
 RUN dotnet tool install --global TSQLLint
