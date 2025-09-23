@@ -66,10 +66,7 @@ jobs:
         -
             name: lookup directory
             run: |
-                ls -lah
-                ls -lah hows-the-weather
-                ls -lah hows-the-weather/bin
-                ls -lah hows-the-weather/bin/Debug
+                ls -lah hows-the-weather/bin/Debug/net8.0
 
         -
             name: deploy database
