@@ -64,15 +64,10 @@ jobs:
                 export PATH="${PATH}:/root/.dotnet/tools"
 
         -
-            name: lookup directory
-            run: |
-                ls -lah hows-the-weather/bin/Debug/net8.0
-
-        -
             name: deploy database
             run: |
                 sqlpackage /Action:Publish \
-                /SourceFile:hows-the-weather/bin/Debug/netstandard2.0/hows-the-weather.dacpac \
+                /SourceFile:hows-the-weather/bin/Debug/net8.0/hows-the-weather.dacpac \
                 /TargetServerName:"${{ secrets.DB_DEPLOY_HOST }}" \
                 /TargetDatabaseName:"${{ secrets.DB_DEPLOY_DATABASE }}" \
                 /TargetUser:"${{ secrets.DB_DEPLOY_USER}}" \
