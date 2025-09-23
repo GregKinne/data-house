@@ -83,7 +83,7 @@ jobs:
                 -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_creation.sql \
-                -G -C
+                -C
 
         - 
             name: post deploy user permissions
@@ -94,4 +94,4 @@ jobs:
                 -U ${{ secrets.DB_DEPLOY_USER }} \
                 -P ${{ secrets.DB_DEPLOY_PASS }} \
                 -i hows-the-weather/PostDeploy/user_permissions.sql \
-                -G -C
+                -C
