@@ -64,6 +64,14 @@ jobs:
                 export PATH="${PATH}:/root/.dotnet/tools"
 
         -
+            name: lookup directory
+            run: |
+                ls -lah
+                ls -lah hows-the-weather
+                ls -lah hows-the-weather/bin
+                ls -lah hows-the-weather/bin/Debug
+
+        -
             name: deploy database
             run: |
                 sqlpackage /Action:Publish \
