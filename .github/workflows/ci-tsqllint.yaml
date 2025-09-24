@@ -26,7 +26,8 @@ jobs:
             name: run tsqllint
             id: tsqllint
             run: |
-                echo "command_output=$(tsqllint . --config .tsqllint)" >> $GITHUB_OUTPUT
+                output=$(tsqllint . --config .tsqllint)
+                echo "$output" >> $GITHUB_OUTPUT
 
         - 
             name: Comment on PR with command output
@@ -38,5 +39,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: `The output of the command is:\n\`\`\`\n"tsqllint"\n\`\`\``
+                        body: `The output of the command is:\n\`\`\`\n"${{ steps.tsqllint.outputs.command_output }}"\n\`\`\``
                     });
