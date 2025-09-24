@@ -8,7 +8,7 @@
         "data-type-length": "error",
         "delete-where": "error",
         "disallow-cursors": "error",
-        "duplicate-empty-line" : "error",
+        "duplicate-empty-line" : "warning",
         "duplicate-go" : "error",
         "full-text": "error",
         "information-schema": "error",
