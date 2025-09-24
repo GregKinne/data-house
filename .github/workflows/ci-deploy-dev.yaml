@@ -72,7 +72,7 @@ jobs:
         -
             name: write proxy credentials
             run: |
-                echo "${{ secrets.GCP_SA }}" >> cloud-sql-proxy-creds.json
+                echo "${{ secrets.GCP_SA }}" | base64 --decode >> cloud-sql-proxy-creds.json
 
         -
             name: start cloud-sql-proxy
