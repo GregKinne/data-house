@@ -27,7 +27,7 @@ jobs:
             id: tsqllint
             run: |
                 tsqllint . --config .tsqllint >> tsqllint_output
-                echo "command_output=$(cat tsqllint_output | tr '\n' ' ')" >> $GITHUB_OUTPUT
+                echo "command_output=$(cat tsqllint_output | tr '\n' '--hold--')" >> $GITHUB_OUTPUT
 
         - 
             name: Comment on PR with command output
@@ -39,5 +39,5 @@ jobs:
                         issue_number: context.issue.number,
                         owner: context.repo.owner,
                         repo: context.repo.repo,
-                        body: `T-SQL Linting is complete. Please review the output below:\n\`\`\`\n" $(${{ steps.tsqllint.outputs.command_output }} | tr ' ' \n)"\n\`\`\``
+                        body: `T-SQL Linting is complete. Please review the output below:\n\`\`\`\n" $(${{ steps.tsqllint.outputs.command_output }} | tr '--hold--' '\n')"\n\`\`\``
                     });
