@@ -66,9 +66,12 @@ jobs:
                 name: deploy database
                 run: |
                     sqlpackage /Action:Publish \
-                    /SourceFile:hows-the-weather/bin/Debug/netstandard2.0/hows-the-weather.dacpac \
-                    /TargetConnectionString:"Data Source=${{ secrets.DB_DEPLOY_HOST }}; Initial Catalog=${{ secrets.DB_DEPLOY_DATABASE }}; UID=${{ secrets.DB_DEPLOY_USER }}; PWD=${{ secrets.DB_DEPLOY_PASS }}"
-
+                    /SourceFile:hows-the-weather/bin/Debug/net8.0/hows-the-weather.dacpac \
+                    /TargetServerName:"${{ secrets.DB_DEPLOY_HOST }}" \
+                    /TargetDatabaseName:"${{ secrets.DB_DEPLOY_DATABASE }}" \
+                    /TargetUser:"${{ secrets.DB_DEPLOY_USER}}" \
+                    /TargetPassword:"${{ secrets.DB_DEPLOY_PASS }}" \
+                    /TargetTrustServerCertificate:True
             - 
                 name: post deploy user creation
                 run: |
@@ -78,7 +81,7 @@ jobs:
                     -U ${{ secrets.DB_DEPLOY_USER }} \
                     -P ${{ secrets.DB_DEPLOY_PASS }} \
                     -i hows-the-weather/PostDeploy/user_creation.sql \
-                    -G
+                    -C
 
             - 
                 name: post deploy user permissions
@@ -89,4 +92,4 @@ jobs:
                     -U ${{ secrets.DB_DEPLOY_USER }} \
                     -P ${{ secrets.DB_DEPLOY_PASS }} \
                     -i hows-the-weather/PostDeploy/user_permissions.sql \
-                    -G
+                    -C
