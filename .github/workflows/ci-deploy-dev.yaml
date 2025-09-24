@@ -64,6 +64,22 @@ jobs:
                 export PATH="${PATH}:/root/.dotnet/tools"
 
         -
+            name: download cloud-sql-proxy
+            run: |
+                curl -o cloud-sql-proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.18.2/cloud-sql-proxy.linux.amd64
+                chmod +x cloud-sql-proxy
+
+        -
+            name: write proxy credentials
+            run: |
+                echo "${{ secrets.GCP_SA }}" | base64 --decode >> cloud-sql-proxy-creds.json
+
+        -
+            name: start cloud-sql-proxy
+            run: |
+                ./cloud-sql-proxy --credentials-file ./cloud-sql-proxy-creds.json treetop-423020:us-central1:sqlsaturday-dev &
+
+        -
             name: deploy database
             run: |
                 sqlpackage /Action:Publish \
