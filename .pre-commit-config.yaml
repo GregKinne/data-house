@@ -1,6 +1,13 @@
 repos:
 -   repo: local
     hooks:
+      - id: format-sql
+        name: format sql files
+        entry: bash ./pre-commit/format.sh
+        language: system
+        pass_filenames: false
+-   repo: local
+    hooks:
       - id: tsqllint
         name: run tsqllint
         entry: tsqllint
