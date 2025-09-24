@@ -26,7 +26,8 @@ jobs:
             name: run tsqllint
             id: tsqllint
             run: |
-                echo output=$(tsqllint . --config .tsqllint) >> $GITHUB_OUTPUT
+                tsqllint . --config .tsqllint >> tsqllint_output
+                echo output=$(cat tsqllint_output) >> $GITHUB_OUTPUT
 
         - 
             name: Comment on PR with command output
