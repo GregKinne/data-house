@@ -1,3 +1,4 @@
+docker rm sql1 --force
 docker run \
     -e "ACCEPT_EULA=Y" \
     -e "MSSQL_SA_PASSWORD=myadminpassword123*" \
