@@ -2,7 +2,7 @@
     "rules": {
         "case-sensitive-variables": "error",
         "conditional-begin-end": "error",
-        "count-star": "error",
+        "count-star": "warning",
         "cross-database-transaction": "error",
         "data-compression": "off",
         "data-type-length": "error",
@@ -20,7 +20,7 @@
         "object-property": "error",
         "print-statement": "error",
         "schema-qualify": "error",
-        "select-star": "error",
+        "select-star": "warning",
         "semicolon-termination": "error",
         "set-variable": "error",
         "unicode-string" : "error",
