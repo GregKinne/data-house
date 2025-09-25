@@ -28,7 +28,6 @@ jobs:
             run: |
                 tsqllint . --config .tsqllint >> tsqllint_output
 
-                "
                 {
                     echo 'command_output<<EOF'
                     echo "$(cat tsqllint_output)"
