@@ -13,4 +13,4 @@ Build & Deploy MSFT SQL variant database code with strong guarantees on quality
 - sqlcmd - deploying post configuration scripts
 
 ## pre-commit configuration
-tsqllint and msbuild are run as part of the pre-commit configuration. This ensures correct syntax, style and object references before the attempted dev deployment on a PR attempt.
+tsqllint, poorsql and optionally msbuild are run as part of the pre-commit configuration. This ensures correct syntax, style and object references before the attempted dev deployment on a PR attempt.
