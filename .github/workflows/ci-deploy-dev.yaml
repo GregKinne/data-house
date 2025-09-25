@@ -27,7 +27,8 @@ jobs:
             name: Build db model
             id: msbuild
             run: |
-                dotnet build hows-the-weather/hows-the-weather.csproj >> msbuild_output
+                dotnet build hows-the-weather/hows-the-weather.csproj >> int_output
+                cat int_output | awk '/Build/{p=1}p' > msbuild_output
 
                 {
                     echo 'command_output<<EOF'
