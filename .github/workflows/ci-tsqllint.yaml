@@ -34,8 +34,6 @@ jobs:
                     echo EOF
                 } >> $GITHUB_OUTPUT
 
-# echo "command_output=$(cat tsqllint_output | tr '\n' '<br/></br>')" >> $GITHUB_OUTPUT
-
         - 
             name: Comment on PR with command output
             uses: actions/github-script@v6
