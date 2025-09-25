@@ -25,8 +25,29 @@ jobs:
 
         -
             name: Build db model
+            id: msbuild
             run: |
-                dotnet build hows-the-weather/hows-the-weather.csproj
+                dotnet build hows-the-weather/hows-the-weather.csproj >> int_output
+                cat int_output | awk '/Build/{p=1}p' > msbuild_output
+
+                {
+                    echo 'command_output<<EOF'
+                    echo "$(cat msbuild_output)"
+                    echo EOF
+                } >> $GITHUB_OUTPUT
+
+        - 
+            name: Comment on PR with command output
+            uses: actions/github-script@v6
+            with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                script: |
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: `msbuild process is complete. Please review the output below:\n\n \`\`\`${{ steps.msbuild.outputs.command_output }}\n`
+                    });
 
         -
             name: Add MSFT key
