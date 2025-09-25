@@ -31,7 +31,7 @@ jobs:
                 "
                 {
                     echo 'command_output<<EOF'
-                    cat tsqllint_output
+                    echo "$(cat tsqllint_output)"
                     echo EOF
                 } >> $GITHUB_OUTPUT
 
