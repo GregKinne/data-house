@@ -24,5 +24,25 @@ jobs:
 
         -
             name: run tsqllint
+            id: tsqllint
             run: |
-                tsqllint . --config .tsqllint
+                tsqllint . --config .tsqllint >> tsqllint_output
+
+                {
+                    echo 'command_output<<EOF'
+                    echo "$(cat tsqllint_output)"
+                    echo EOF
+                } >> $GITHUB_OUTPUT
+
+        - 
+            name: Comment on PR with command output
+            uses: actions/github-script@v6
+            with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                script: |
+                    github.rest.issues.createComment({
+                        issue_number: context.issue.number,
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        body: `T-SQL Linting is complete. Please review the output below:\n\n \`\`\`${{ steps.tsqllint.outputs.command_output }}\`\`\`\n`
+                    });
