@@ -2,7 +2,7 @@
     "rules": {
         "case-sensitive-variables": "warning",
         "conditional-begin-end": "warning",
-        "count-star": "warning",
+        "count-star": "error",
         "cross-database-transaction": "warning",
         "data-compression": "off",
         "data-type-length": "warning",
@@ -20,7 +20,7 @@
         "object-property": "warning",
         "print-statement": "warning",
         "schema-qualify": "warning",
-        "select-star": "warning",
+        "select-star": "error",
         "semicolon-termination": "warning",
         "set-variable": "warning",
         "unicode-string" : "warning",
